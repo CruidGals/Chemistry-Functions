@@ -1,7 +1,4 @@
 import math
-import sys
-import pandas as pd
-import re
 
 def round_half_up(n, decimals=0):
     multiplier = 10**decimals
@@ -76,17 +73,3 @@ def molar_mass_calc(formula: str, mass_dict: dict) -> float:
         total_mass += mass_dict[element] * float(occurences)
 
     return round_half_up(total_mass, 2)
-
-
-#Args (1st arg is chemical formula, 2nd arg is sig fig for amu)
-formula = sys.argv[1]
-decimals = 2
-
-element_data = pd.read_csv("data/elements.csv", usecols=['Symbol', 'AtomicMass'])
-
-symbol_list = element_data['Symbol']
-atomic_mass_list = element_data['AtomicMass']
-
-element_dict = {symbol_list[i]: round_half_up(float(atomic_mass_list[i]), decimals=decimals) for i in range(len(symbol_list))}
-
-print(molar_mass_calc(formula, element_dict))
