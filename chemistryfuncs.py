@@ -73,3 +73,6 @@ def molar_mass_calc(formula: str, mass_dict: dict) -> float:
         total_mass += mass_dict[element] * float(occurences)
 
     return round_half_up(total_mass, 2)
+
+def round_sigfig(num: float | int, sigfigs: int):
+    return '{:.{p}g}'.format(float('{:.{p}g}'.format(num, p=sigfigs)),p=sigfigs)
